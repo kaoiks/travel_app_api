@@ -26,7 +26,45 @@ SECRET_KEY = 'django-insecure-qp&2$o@cau18hv)&0ugh-n%np^yffj==6aru2_py97zip+j_0x
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
+# Logging
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'simple': {
+            'format': "%(asctime)s %(name)s %(levelname)s: %(message)s"
+        },
+        'robust': {
+            'format': "%(asctime)s | %(name)s | %(levelname)s | %(filename)s | %(funcName)s | line %(lineno)d: %(message)s"
+        }
+    },
+    'handlers': {
+        'console': {
+            'level': 'INFO',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+        "console-file": {
+            "class": "logging.StreamHandler",
+            "formatter": "robust",
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': False
+        },
+        '': {
+            'handlers': ['console-file'],
+            'level': 'DEBUG',
+            'propagate': False,
+        }
+    },
+}
 
 
 # Application definition
@@ -38,7 +76,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework'
+    'rest_framework',
+    "exampleapp.apps.ExampleappConfig",
 ]
 
 MIDDLEWARE = [
