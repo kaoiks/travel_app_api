@@ -5,18 +5,18 @@ ENV PYTHONUNBUFFERED=1
 
 COPY docker/requirements.txt .
 
+# copy django scripts
+COPY docker/scripts/* /usr/local/bin/
+
 # install requirements
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
+RUN pip install --upgrade pip \
+    pip install -r requirements.txt
 
 WORKDIR /code
 
 COPY . .
 
-# copy django scripts
-COPY docker/scripts/* /usr/local/bin/
-
-RUN python manage runserver 0.0.0.0:8000
+WORKDIR /code/src
 
 LABEL maintainer jakub-mrow
 LABEL Project=django-skeleton
