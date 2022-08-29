@@ -31,7 +31,7 @@ class TaskViewSet(viewsets.ModelViewSet):
         task.save()
         logging.info("Task created")
 
-        return Response({"msg": "Task created"})
+        return Response({"msg": "Task created"}, status=status.HTTP_201_CREATED)
 
 
     def list(self, request):
@@ -41,4 +41,4 @@ class TaskViewSet(viewsets.ModelViewSet):
         qs = models.Task.objects.all()
         task_serializer = serializers.TaskSerializer(qs, many=True)
 
-        return Response(task_serializer.data)
+        return Response(task_serializer.data, status=status.HTTP_200_OK)
