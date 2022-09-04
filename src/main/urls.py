@@ -17,5 +17,6 @@ from django.conf.urls import include
 from django.urls import re_path
 
 urlpatterns = [
-    re_path("^api/", include("exampleapp.urls"))
+    re_path("^api/", include("exampleapp.urls")),
+    re_path("^auth/", include("authconf.auth_urls"))
 ]
