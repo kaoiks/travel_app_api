@@ -2,12 +2,12 @@ name: Deployment from Github to AWS
 on:
   push:
     branches:
-      -main
+      - main
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout latest repo
+      - name: Checkout latest repository
         uses: actions/checkout@main
         
       - name: Generate deployment package
