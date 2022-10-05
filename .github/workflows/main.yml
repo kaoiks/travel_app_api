@@ -32,7 +32,7 @@ jobs:
           time: '30s'
 
       - name: run tests
-        run: docker-compose exec django pytest
+        run: docker-compose exec -T django pytest
 
       - name: stop containers
         run: docker-compose down
