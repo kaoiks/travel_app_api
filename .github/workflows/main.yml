@@ -7,10 +7,13 @@ on:
 jobs:
   continuous-integration:
     runs-on: ubuntu-latest
-    env:
-      APP_PORT: 8000
-      APP_CONTAINER_NAME: django
     steps:
+    - name: 'Create env file'
+      run: |
+        touch .env
+        echo APP_PORT=8080 >> .env
+        echo APP_CONTAINER_NAME="django" >> .env
+        cat .env
 
     - name: Checkout source code
       uses: actions/checkout@v2
