@@ -26,6 +26,11 @@ jobs:
           APP_CONTAINER_NAME: django
         run: docker-compose up -d --build
 
+      - name: Sleep for 30 seconds
+        uses: jakejarvis/wait-action@master
+        with:
+          time: '30s'
+
       - name: run tests
         run: docker-compose exec django pytest
 
