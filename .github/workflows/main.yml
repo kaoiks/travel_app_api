@@ -8,6 +8,9 @@ jobs:
   continuous-integration:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout source code
+        uses: actions/checkout@v2
+
       - name: 'Create env file'
         run: |
           touch .env
@@ -16,9 +19,6 @@ jobs:
           cat .env
           ls -la
           pwd
-
-      - name: Checkout source code
-        uses: actions/checkout@v2
 
       - name: build and run container
         env:
