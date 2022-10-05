@@ -10,10 +10,8 @@ jobs:
     steps:
     - name: 'Create env file'
       run: |
-        touch .env
-        echo APP_PORT=8080 >> .env
-        echo APP_CONTAINER_NAME="django" >> .env
-        cat .env
+        export APP_PORT=8080
+        export APP_CONTAINER_NAME="django"
 
     - name: Checkout source code
       uses: actions/checkout@v2
