@@ -19,6 +19,9 @@ jobs:
         uses: actions/checkout@v2
 
       - name: build and run container
+        env:
+          APP_PORT: 8080
+          APP_CONTAINER_NAME: django
         run: docker-compose up -d --build
 
       - name: run tests
