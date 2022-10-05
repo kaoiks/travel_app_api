@@ -8,19 +8,21 @@ jobs:
   continuous-integration:
     runs-on: ubuntu-latest
     steps:
-    - name: 'Create env file'
-      run: |
-        export APP_PORT=8080
-        export APP_CONTAINER_NAME="django"
+      - name: 'Create env file'
+        run: |
+          touch .env
+          echo APP_PORT=8080 >> .env
+          echo APP_CONTAINER_NAME="django" >> .env
+          cat .env
 
-    - name: Checkout source code
-      uses: actions/checkout@v2
+      - name: Checkout source code
+        uses: actions/checkout@v2
 
-    - name: build and run container
-      run: docker-compose up -d --build
+      - name: build and run container
+        run: docker-compose up -d --build
 
-    - name: run tests
-      run: docker-compose exec django pytest
+      - name: run tests
+        run: docker-compose exec django pytest
 
-    - name: stop containers
-      run: docker-compose down
+      - name: stop containers
+        run: docker-compose down
