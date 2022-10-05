@@ -7,6 +7,9 @@ on:
 jobs:
   continuous-integration:
     runs-on: ubuntu-latest
+    env:
+      APP_PORT: 8000
+      APP_CONTAINER_NAME: django
     steps:
 
     - name: Checkout source code
