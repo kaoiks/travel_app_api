@@ -5,24 +5,18 @@ on:
     - main
 
 jobs:
-  build:
+  continuous-integration:
     runs-on: ubuntu-latest
     steps:
 
     - name: Checkout source code
       uses: actions/checkout@v2
 
-    - name: Generate deployment package
-      run: zip -r deploy.zip *
+    - name: build and run container
+      run: docker-compose up -d --build
 
-    - name: Deploy to EB
-      uses: einaregilsson/beanstalk-deploy@v20
-      with:
-        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        application_name: django-skeleton
-        environment_name: Djangoskeleton-env
-        version_label: "django-skeleton-deployment"
-        region: eu-central-1
-        deployment_package: deploy.zip
-        use_existing_version_if_available: true
+    - name: run tests
+      run: docker-compose exec django pytest
+
+    - name: stop containers
+      run: docker-compose down
