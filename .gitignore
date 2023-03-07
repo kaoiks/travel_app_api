@@ -19,3 +19,5 @@ db.sqlite3
 .idea
 .coverage
 .vscode/
+
+**/.DS_Store
