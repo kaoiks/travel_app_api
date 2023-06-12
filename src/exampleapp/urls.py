@@ -6,6 +6,7 @@ from exampleapp import views
 
 router = DefaultRouter()
 router.register("tasks", views.TaskViewSet, "task")
+router.register(r'tickets', views.TicketViewSet, "ticket")
 
 urlpatterns = [
     re_path("", include(router.urls))
