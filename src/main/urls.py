@@ -15,10 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import include
 from django.urls import re_path
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 # api and auth routes
 urlpatterns = [
+
     re_path("^api/", include("exampleapp.urls")),
     re_path("^auth/", include("authconf.auth_urls"))
-]
+
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

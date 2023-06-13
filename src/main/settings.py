@@ -31,6 +31,13 @@ ALLOWED_HOSTS = ['*']
 
 # Logging
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'rest_framework_simplejwt.authentication.JWTAuthentication',
+    # Other authentication backends
+]
+
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

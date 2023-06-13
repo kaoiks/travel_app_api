@@ -1,6 +1,6 @@
 from django.db import models
 from django.conf import settings
-
+from django.utils import timezone
 
 class User(models.Model):
     name = models.CharField(max_length=64, unique=True, help_text="user full name")
@@ -18,10 +18,14 @@ class Ticket(models.Model):
     name = models.CharField(max_length=255, null=False, blank=False)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     file_field = models.FileField(upload_to='media_files/', null=True, blank=True)
-    travel_date = models.DateTimeField(auto_now=True)
+    travel_date = models.DateTimeField(null=True, blank=True)
     start_location = models.ForeignKey('Location', on_delete=models.SET_NULL, null=True, related_name='start_tickets')
     end_location = models.ForeignKey('Location', on_delete=models.SET_NULL, null=True, related_name='end_tickets')
 
+    def save(self, *args, **kwargs):
+        if self.travel_date is None:
+            self.travel_date = timezone.now()
+        super().save(*args, **kwargs)
 
 class Location(models.Model):
     name = models.CharField(max_length=250, help_text="Location Name")

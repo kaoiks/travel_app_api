@@ -17,8 +17,16 @@ class TaskSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class LocationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Location
+        exclude = ['id']
+
+
 class TicketSerializer(serializers.ModelSerializer):
+    start_location = LocationSerializer()
+    end_location = LocationSerializer()
+
     class Meta:
         model = models.Ticket
         exclude = ['user']
-
